@@ -15,7 +15,7 @@ basicauth = ("admin", "cisco")
 def create():
     yangConfig = {
     "ietf-interfaces:interface": {
-        "name": "Loopback108",
+        "name": "Loopback65070108",
         "type": "iana-if-type:softwareLoopback",
         "enabled": True,
         "ietf-ip:ipv4": {
@@ -31,7 +31,7 @@ def create():
 } 
 
     resp = requests.put(
-        api_url + "/data/ietf-interfaces:interfaces/interface=Loopback108", 
+        api_url + "/data/ietf-interfaces:interfaces/interface=Loopback65070108", 
         data=json.dumps(yangConfig), 
         auth=basicauth, 
         headers=headers, 
@@ -47,7 +47,7 @@ def create():
 
 def delete():
     resp = requests.delete(
-        api_url + "/data/ietf-interfaces:interfaces/interface=Loopback108", 
+        api_url + "/data/ietf-interfaces:interfaces/interface=Loopback65070108", 
         auth=basicauth, 
         headers=headers, 
         verify=False
@@ -55,7 +55,7 @@ def delete():
 
     if(resp.status_code >= 200 and resp.status_code <= 299):
         print("STATUS OK: {}".format(resp.status_code))
-        return "Interface loopback 66070108 is deleted successfully"
+        return "Interface loopback 65070108 is deleted successfully"
     else:
         print('Error. Status Code: {}'.format(resp.status_code))
 
@@ -129,6 +129,6 @@ def status():
             return "Interface loopback 66070108 is disabled"
     elif(resp.status_code == 404):
         print("STATUS NOT FOUND: {}".format(resp.status_code))
-        return "No Interface loopback 66070108"
+        return "No Interface loopback 65070108"
     else:
         print('Error. Status Code: {}'.format(resp.status_code))
