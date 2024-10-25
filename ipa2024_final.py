@@ -11,13 +11,13 @@ import time
 import json
 from restconf_final import create, delete, enable, disable, status
 import os
-
+from dotenv import load_dotenv
 #######################################################################################
 # 2. Assign the Webex access token to the variable ACCESS_TOKEN using environment variables.
-# API_TOKEN = os.getenv("API_TOKEN")
+load_dotenv()
 
-# ACCESS_TOKEN = os.getenv("API_TOKEN")
-ACCESS_TOKEN = "Bearer YTgyMjkyZmMtMzQyYS00YmZlLThmZjctMWFjMDgxNTlhMmNlMjVjZjk0YmEtZjQ4_P0A1_1ad92174-dfe2-4740-b008-57218895946c"
+ACCESS_TOKEN = os.getenv("API_TOKEN")
+# ACCESS_TOKEN = "Bearer YTgyMjkyZmMtMzQyYS00YmZlLThmZjctMWFjMDgxNTlhMmNlMjVjZjk0YmEtZjQ4_P0A1_1ad92174-dfe2-4740-b008-57218895946c"
 
 #######################################################################################
 # 3. Prepare parameters get the latest message for messages API.
@@ -122,7 +122,7 @@ while True:
             postData = MultipartEncoder(postData)
             HTTPHeaders = {
             "Authorization": ACCESS_TOKEN,
-            "Content-Type": "/application/json",
+            "Content-Type": "application/json",
             }
         # other commands only send text, or no attached file.
         else:
@@ -130,9 +130,11 @@ while True:
             postData = json.dumps(postData)
 
             # the Webex Teams HTTP headers, including the Authoriztion and Content-Type
-            HTTPHeaders = {"Authorization": ACCESS_TOKEN, "Content-Type": "/application/json"}   
+            HTTPHeaders = {"Authorization": ACCESS_TOKEN, "Content-Type": "application/json"}   
 
         # Post the call to the Webex Teams message API.
+        # HTTPHeaders = {"Authorization": ACCESS_TOKEN, "Content-Type": "application/json"}
+        # postData = {"roomId": roomIdToGetMessages, "text": responseMessage}
 
         r = requests.post(
             "https://webexapis.com/v1/messages",

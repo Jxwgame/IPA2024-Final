@@ -17,7 +17,7 @@ def create():
     "ietf-interfaces:interface": {
         "name": "Loopback108",
         "type": "iana-if-type:softwareLoopback",
-        "enabled": true,
+        "enabled": True,
         "ietf-ip:ipv4": {
             "address": [
                 {
