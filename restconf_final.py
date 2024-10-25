@@ -126,7 +126,7 @@ def status():
         if admin_status == 'up' and oper_status == 'up':
             return "Interface loopback 65070108 is enabled"
         elif admin_status == 'down' and oper_status == 'down':
-            return "Interface loopback 66070108 is disabled"
+            return "Interface loopback 65070108 is disabled"
     elif(resp.status_code == 404):
         print("STATUS NOT FOUND: {}".format(resp.status_code))
         return "No Interface loopback 65070108"
