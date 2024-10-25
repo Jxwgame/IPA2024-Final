@@ -14,21 +14,30 @@ device_params = {
 
 
 def gigabit_status():
-    ans = ""
+    ans = "show ip interface brief"
     with ConnectHandler(**device_params) as ssh:
         up = 0
         down = 0
         admin_down = 0
-        result = ssh.send_command("<!!!REPLACEME with proper command!!!>", use_textfsm=True)
-        for status in result:
-            if <!!!Write code here!!!>:
-                <!!!Write code here!!!>
-                if <!!!Write code here!!!> == "up":
-                    up += 1
-                elif <!!!Write code here!!!> == "down":
-                    down += 1
-                elif <!!!Write code here!!!> == "administratively down":
-                    admin_down += 1
-        ans = <!!!Write code here!!!>
+        
+        result = ssh.send_command(ans, use_textfsm=True)
+        
+        interface_status = []
+        
+        for interface in result:
+            interface_name = interface['intf']
+            status = interface['status']
+            
+            interface_status.append(f"{interface_name} {status}")
+            
+            if status == "up":
+                up += 1
+            elif status == "down":
+                down += 1
+            elif status == "administratively down":
+                admin_down += 1
+        
+
+        ans = ', '.join(interface_status) + f" -> {up} up, {down} down, {admin_down} administratively down"
         pprint(ans)
         return ans

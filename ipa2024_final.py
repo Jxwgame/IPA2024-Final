@@ -10,8 +10,10 @@ import requests
 import time
 import json
 from restconf_final import create, delete, enable, disable, status
+
 import os
 from dotenv import load_dotenv
+from requests_toolbelt.multipart import MultipartEncoder
 #######################################################################################
 # 2. Assign the Webex access token to the variable ACCESS_TOKEN using environment variables.
 load_dotenv()
@@ -89,8 +91,8 @@ while True:
             responseMessage = disable()
         elif command == "status":
             responseMessage = status()
-        #  elif command == "gigabit_status":
-        #     responseMessage = "wait"
+         elif command == "gigabit_status":
+            responseMessage = gigabit_status()
         # elif command == "showrun":
         #     responseMessage = "wait"
         else:
